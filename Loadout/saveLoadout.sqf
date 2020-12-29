@@ -1,9 +1,18 @@
 /* 
-	Author: Assault 
-	Description: Contains code that generates task like notifications.
+	Author:
+        Assault 
+
+	Description:
+        Creates an action for the player to save their current loadout.
 
 	Usage:
-	["Mission complete!", "SUCCEEDED"] execVM "Notification\task.sqf";
+        Init field of target:
+	        execVM "Loadout\saveLoadout.sqf";
+
+        onPlayerRespawn.sqf:
+            if (!isNil {player getVariable "PlayerLoadout"}) then {
+                player setUnitLoadout [player getVariable "PlayerLoadout", true];
+            };
 */ 
 
 _this select 0 addAction [

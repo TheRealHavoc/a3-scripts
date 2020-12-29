@@ -1,9 +1,13 @@
 /* 
-	Author: Assault 
-	Description: Contains code that generates task like notifications.
+	Author: 
+		Assault
+
+	Description: 
+		Contains code that generates task like notifications.
 
 	Usage:
-	["Mission complete!", "SUCCEEDED"] execVM "Notification\task.sqf";
+		Init field of target:
+			["Mission complete!", "SUCCEEDED"] execVM "Notification\task.sqf";
 */
 
 params ["_msg", "_state"];
