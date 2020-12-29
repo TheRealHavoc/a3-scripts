@@ -3,7 +3,7 @@
 	Description: Contains code that generates task like notifications.
 
 	Usage:
-	["Mission complete!", "SUCCEEDED"] execVM "Notification\Task.sqf";
+	["Mission complete!", "SUCCEEDED"] execVM "Notification\task.sqf";
 */
 
 params ["_msg", "_state"];
