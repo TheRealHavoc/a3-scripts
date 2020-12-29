@@ -7,10 +7,10 @@
 
 	Usage:
 		Init field of target:
-			["Mission complete!", "SUCCEEDED"] execVM "Notification\task.sqf";
+			["Mission complete!", "SUCCEEDED", player] execVM "Notification\task.sqf";
 */
 
-params ["_msg", "_state"];
+params ["_msg", "_state", "_owner"];
 
-[true, ["taskNotification"], ["", _msg, ""], objNull, _state, -1, true, "", false] call BIS_fnc_taskCreate;
-["taskNotification", west] call BIS_fnc_deleteTask;
+[_owner, ["taskNotification"], ["", _msg, ""], objNull, _state, -1, true, "", false] call BIS_fnc_taskCreate;
+["taskNotification", true] call BIS_fnc_deleteTask;
