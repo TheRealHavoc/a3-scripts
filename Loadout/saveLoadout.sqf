@@ -1,18 +1,18 @@
 /* 
 	Author:
-        Assault 
+		Havoc & Ahoy World
 
 	Description:
-        Creates an action for the player to save their current loadout.
+		Creates an action for the player to save their current loadout.
 
 	Usage:
-        Init field of target:
-	        execVM "Loadout\saveLoadout.sqf";
+		Init field of target:
+			execVM "Loadout\saveLoadout.sqf";
 
-        onPlayerRespawn.sqf:
-            if (!isNil {player getVariable "PlayerLoadout"}) then {
-                player setUnitLoadout [player getVariable "PlayerLoadout", true];
-            };
+	onPlayerRespawn.sqf:
+		if (!isNil {player getVariable "PlayerLoadout"}) then {
+			player setUnitLoadout [player getVariable "PlayerLoadout", true];
+		};
 */ 
 
 _this select 0 addAction [
