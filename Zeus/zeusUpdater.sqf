@@ -1,30 +1,45 @@
 /*
-    Author:
-        Havoc
-    
-    Description:
-        Adds units and vehicles to the zeus interface.
+	Author:
+		Havoc
+	
+	Description:
+		Adds objects to the zeus interface.
 
-    Usage:
-        initServer.sqf: 
-            nul = [10] execVM "zeusUpdater.sqf";
-    
-    Parameters:
-        interval - Seconds between each update.
+	Usage:
+		initServer.sqf: 
+			nul = [] execVM "zeusUpdater.sqf";
 */
 
-params ["_interval"];
+addToAllCuratorsFnc = {
+	params ["_objects"];
+
+	{
+		if (isNil {_objects}) then {
+			_objects = (entities "AllVehicles" - entities "Animal");
+		};
+		
+		_x addCuratorEditableObjects [_objects, true];
+	} forEach allCurators;
+};
 
 if (isServer) then {
-    [_interval] spawn {
-        while {true} do {
-            {
-                _x addCuratorEditableObjects [allUnits, true];
-                _x addCuratorEditableObjects [vehicles, true];
-                _x addCuratorEditableObjects [allPlayers, true];
-                
-                sleep (_this select 0) select 0;
-            } forEach allCurators;
-        }; 
-    };
+	addMissionEventHandler ["PlayerConnected", {
+		params ["_id", "_uid", "_name", "_jip", "_owner", "_idstr"];
+
+		[] spawn addToAllCuratorsFnc;
+	}];
+
+	{
+		_x addEventHandler ["CuratorObjectPlaced", {
+			params ["_curator", "_entity"];
+
+			[] spawn addToAllCuratorsFnc;
+		}];
+
+		_x addEventHandler ["CuratorGroupPlaced", {
+			params ["_curator", "_group"];
+
+			[] spawn addToAllCuratorsFnc;
+		}];
+	} forEach allCurators;
 };
